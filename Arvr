@@ -1,0 +1,146 @@
+Practical 2
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class changeColor : MonoBehaviour
+{
+    public Renderer sphererenderer;
+    public GameObject sphere;
+    public Color newcolor;
+ 
+    public void ChangeColor() {
+        newcolor = Random.ColorHSV();
+        sphererenderer.material.color = newcolor;
+    }
+ 
+    // Start is called before the first frame update
+    void Start()
+    {
+        sphererenderer = sphere.GetComponent<Renderer>();
+    }
+ 
+    // Update is called once per frame
+    void Update()
+    {
+ 
+    }
+}
+ practrical 4, 6
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class moveBall : MonoBehaviour
+{
+    public float Speed;
+    // Start is called before the first frame update
+    void FixedUpdate()
+    {
+        float HorizontalMovement = Input.GetAxis("Horizontal");
+        float VerticalMovement = Input.GetAxis("Vertical");
+        Vector3 MoveBall = new Vector3(HorizontalMovement, 0, VerticalMovement);
+        gameObject.transform.GetComponent<Rigidbody>().AddForce(MoveBall * Speed);
+    }
+ 
+    void Start()
+    {
+ 
+    }
+ 
+    // Update is called once per frame
+    void Update()
+    {
+ 
+    }
+}
+
+practical 6
+ wall
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class collionScript : MonoBehaviour
+{
+    private void OnCollisionEnter(Collision other)
+    {
+        GetComponent<MeshRenderer>().material.color = Color.black;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+ 
+    }
+ 
+    // Update is called once per frame
+    void Update()
+    {
+ 
+    }
+}
+ 
+
+practical 9
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class cloud_script : MonoBehaviour
+{
+    public float moveSpeed = 5;
+    // Start is called before the first frame update
+    void Start()
+    {
+ 
+    }
+ 
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+    }
+}
+
+practical main scrip 9
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+ 
+public class main_script : MonoBehaviour
+{
+    public GameObject T;
+    public float spwanRate = 2;
+    private float timer = 0;
+    public float heightOffset = 0;
+ 
+    void spwanT()
+    {
+        float lowestPoint = transform.position.y - heightOffset;
+        float highestPoint = transform.position.y + heightOffset;
+        Instantiate(T, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0),
+        transform.rotation);
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        spwanT();
+    }
+ 
+    // Update is called once per frame
+    void Update()
+    {
+        if (timer < spwanRate)
+        {
+            timer = timer + Time.deltaTime;
+        }
+        else
+        {
+            spwanT();
+            timer = 0;
+        }
+    }
+}
+ 
+
